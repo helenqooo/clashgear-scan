@@ -1,0 +1,16 @@
+[Unit]
+Description=ClashGear: residential answers to CAPE guests' ip-api.com lookups (anti-evasion for Token Tuzağı)
+After=libvirtd.service network-online.target
+Wants=network-online.target
+[Service]
+User=nobody
+ExecStart=/usr/bin/python3 /opt/cg-ipapi/server.py
+Restart=always
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+CapabilityBoundingSet=
+[Install]
+WantedBy=multi-user.target

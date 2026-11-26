@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root,
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+    --background: 0 0% 6.3%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 16%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 95% 8%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 83%;
+    --radius: 0.9rem;
+  }
+
+  /* ClashGear Scan is always dark, whatever the site theme is. */
+  .scan-dark {
+    color-scheme: dark;
+    --background: 0 0% 6.3%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 7.5%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 95% 8%;
+    --border: 0 0% 16%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 70%;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  /* Scan: translucent chrome, display type, press feedback (apple-design). */
+  .scan-dark .glass {
+    background: rgba(18, 18, 18, 0.55);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.14);
+  }
+  .scan-dark .display {
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-optical-sizing: auto;
+  }
+  .scan-dark .press { transition: transform 120ms ease-out, background-color 150ms ease; }
+  .scan-dark .press:active { transform: scale(0.97); }
+  @media (prefers-reduced-transparency: reduce) {
+    .scan-dark .glass { background: rgb(20, 20, 20); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-contrast: more) {
+    .scan-dark .glass { background: rgb(12, 12, 12); border-color: rgba(255, 255, 255, 0.5); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scan-dark .press:active { transform: none; }
+  }
+
+  /* 21st.dev Border Beam (@gooseui) and Text Shimmer (Agent Elements). */
+  @keyframes border-beam-spin { from { --beam-angle: 0deg; } to { --beam-angle: 360deg; } }
+  .border-beam-ring {
+    padding: var(--border-width);
+    background: linear-gradient(var(--beam-angle, 0deg), transparent 0%, transparent 35%, var(--color-from) 50%, var(--color-to) 65%, transparent 80%, transparent 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: border-beam-spin var(--duration) linear infinite var(--delay);
+  }
+  /* Liquid input: spinning edge + caret (21st.dev Liquid Multimodal Input) */
+  @keyframes lmi-spin { to { --lmi-angle: 360deg; } }
+  .lmi-border { animation: lmi-spin 32s linear infinite; }
+  @keyframes lmi-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  .lmi-caret { animation: lmi-caret 1s step-end infinite; }
+  @media (prefers-reduced-motion: reduce) { .lmi-border, .lmi-caret { animation: none; } }
+  /* AI avatar blink (21st.dev avatar primitive) */
+  @keyframes av-blink { 0%, 88%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.07); } 97% { transform: scaleY(0.07); } }
+  @media (prefers-reduced-motion: reduce) { [style*='av-blink'] { animation: none !important; } }
+  @keyframes text-shimmer { from { background-position: 100% center; } to { background-position: 0% center; } }
+  .text-shimmer {
+    display: inline-block;
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(90deg, #a3a3a3 0%, #a3a3a3 40%, #f5f5f5 50%, #a3a3a3 60%, #a3a3a3 100%);
+    background-repeat: no-repeat;
+    animation: text-shimmer 2s linear infinite;
+  }
+  /* Nyx "analysis finished" scene (NyxIntro.tsx): the bubble's slowly turning lit border, the light running along the arrow */
+  @keyframes nyx-ring-spin { to { --nyx-angle: 360deg; } }
+  .nyx-bubble-ring {
+    padding: 1px;
+    background: conic-gradient(from var(--nyx-angle, 0deg), rgba(143,166,200,0.08) 0%, rgba(143,166,200,0.08) 55%, rgba(143,166,200,0.75) 75%, #f2f6fb 86%, rgba(143,166,200,0.08) 97%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: nyx-ring-spin 6s linear infinite;
+  }
+  .nyx-bubble { box-shadow: 0 0 40px -12px rgba(143,166,200,0.45); }
+  @keyframes nyx-arrow-run { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  .nyx-arrow-run { animation: nyx-arrow-run 2.2s cubic-bezier(0.65,0,0.35,1) infinite; }
+  @media (prefers-reduced-motion: reduce) { .nyx-bubble-ring, .nyx-arrow-run { animation: none; } }
+
+  /* Nyx analyst chat: agent activity rail (ai-agent-response.tsx) */
+  @keyframes agent-fade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes agent-row-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes agent-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .agent-shimmer-text {
+    background-image: linear-gradient(100deg, hsl(var(--muted-foreground)) 42%, hsl(var(--foreground)) 50%, hsl(var(--muted-foreground)) 58%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: agent-shimmer 3.4s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .border-beam-ring, .text-shimmer, .agent-shimmer-text { animation: none; }
+  }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 93%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 72% 46%;
+    --destructive-foreground: 0 0% 98%;
+    --warning: 32 95% 40%;
+    --warning-foreground: 38 95% 97%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 0 0% 55%;
+    --radius: 0.9rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+@keyframes float {
+  50% { transform: translateY(-10px); }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* Animatable angle for the border beam (must be top-level, outside @layer). */
+@property --beam-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@property --lmi-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@property --nyx-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
+/* 21st.dev Sentinel Core Eye (VPN window): blinks, scanning pupil, pulsing circuit traces. */
+@keyframes sentinel-blink { 0%, 92%, 100% { transform: scaleY(0); } 95% { transform: scaleY(1); } }
+@keyframes sentinel-scan { 0% { top: -10%; } 100% { top: 110%; } }
+@keyframes sentinel-pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+.sentinel-lid { transform: scaleY(0); animation: sentinel-blink 4.2s ease-in-out infinite; }
+.sentinel-scan { animation: sentinel-scan 1.6s linear infinite; }
+.sentinel-circuit { animation: sentinel-pulse 2.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .sentinel-lid, .sentinel-scan, .sentinel-circuit { animation: none; } }

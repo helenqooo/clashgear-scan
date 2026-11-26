@@ -1,0 +1,19 @@
+[Unit]
+Description=ClashGear: static engines for Scan (YARA, capa, FLOSS, DIE, TLSH, stealer extractor, APK) - backend tunnel only
+After=network.target
+[Service]
+User=cgstatic
+ExecStart=/opt/cg-static/venv/bin/python /opt/cg-static/server.py
+Restart=always
+# Samples are parsed, never run: no network beyond localhost, no writes outside its work dir.
+IPAddressDeny=any
+IPAddressAllow=localhost
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/cg-static
+MemoryMax=8G
+CPUQuota=600%
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,20 @@
+{
+  "name": "clashgear-scan-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "description": "ClashGear Scan backend: multi-layer file/URL threat analysis with an AI analyst (Nyx).",
+  "engines": { "node": ">=24" },
+  "scripts": { "start": "node server.example.js", "dev": "node --watch server.example.js" },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.4.0",
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/multipart": "^10.1.7",
+    "@resvg/resvg-js": "^2.6.2",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.1",
+    "guacamole-lite": "^1.2.0",
+    "iced-x86": "^1.22.0"
+  }
+}
