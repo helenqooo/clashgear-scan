@@ -79,7 +79,7 @@ function Shell({ children, onLogout }: { children: ReactNode; onLogout?: () => v
       <div className="relative mx-auto max-w-6xl px-4 pb-6 pt-8 sm:px-6">
         {children}
         <footer className="mt-16 border-t border-border pt-6 text-center text-xs text-muted-foreground">
-          © ClashGear · <a href="https://cheatglobal.com" target="_blank" title="Cheatglobal" className="text-foreground hover:underline">Cheatglobal</a>
+          © ClashGear
         </footer>
       </div>
     </div>
@@ -109,7 +109,7 @@ function KeyForm({ compact }: { compact?: boolean }) {
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
   // Pasted keys pick up quotes/backticks and invisible characters, and mobile keyboards capitalise "Cgs_".
-  // Besides cgs_ keys there are plain shared words (e.g. "cheatglobal"), so any shape is accepted.
+  // Besides cgs_ keys there are plain shared words (e.g. "community"), so any shape is accepted.
   const trimmed = key.replace(/[\s​-‍﻿`'"“”‘’]/g, '').replace(/^cgs_/i, 'cgs_')
   const shapeOff = false
   const submit = async (e: React.FormEvent) => {
@@ -416,7 +416,7 @@ function ScanLanding() {
         </section>
 
         <footer className="border-t border-white/[0.06] py-8 text-center text-xs text-neutral-500">
-          © ClashGear · <a href="https://cheatglobal.com" target="_blank" title="Cheatglobal" className="text-neutral-300 hover:underline">Cheatglobal</a>
+          © ClashGear
         </footer>
       </div>
     </MotionConfig>

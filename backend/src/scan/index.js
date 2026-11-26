@@ -170,7 +170,7 @@ export async function registerScan(app) {
     if (blocked(req.ip)) { onLoginBlocked(req.ip); return bad(reply, 429, 'too_many_attempts') }
     // Same clean-up as the page: stray quotes/backticks, invisible characters, a capitalised "Cgs_".
     let key = String(req.body?.key || '').replace(/[\s​-‍﻿`'"“”‘’]/g, '').replace(/^cgs_/i, 'cgs_')
-    // Plain shared words ("cheatglobal") are matched case-insensitively; cgs_ keys stay exact.
+    // Plain shared words ("community") are matched case-insensitively; cgs_ keys stay exact.
     if (!key.startsWith('cgs_')) key = key.toLowerCase()
     // Only key-shaped input ever reaches the lookup (letters, digits, _ and -, 6-100 long); the rest counts as a miss.
     const row = /^[A-Za-z0-9_-]{6,100}$/.test(key) ? findKey(key) : null
